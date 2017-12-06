@@ -1,0 +1,121 @@
+#################################
+Before Any Transaction
+----------------------
+Vincent Chase      20000 Satoshi
+Eric Murphy         3500 Satoshi
+Johnny Chase        1500 Satoshi
+Turtle              5000 Satoshi
+Ari Gold           10000 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After Transaction #1
+----------------------
+Vincent Chase      20000 Satoshi
+Eric Murphy         1291 Satoshi
+Johnny Chase        1500 Satoshi
+Turtle              7209 Satoshi
+Ari Gold           10000 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After Transaction #2
+----------------------
+Vincent Chase      20000 Satoshi
+Eric Murphy         1291 Satoshi
+Johnny Chase        1500 Satoshi
+Turtle              6954 Satoshi
+Ari Gold           10255 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After Transaction #3
+----------------------
+Vincent Chase      20000 Satoshi
+Eric Murphy         1291 Satoshi
+Johnny Chase        1500 Satoshi
+Turtle              1020 Satoshi
+Ari Gold           16189 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After Transaction #4
+----------------------
+Vincent Chase      20000 Satoshi
+Eric Murphy         1291 Satoshi
+Johnny Chase        1649 Satoshi
+Turtle               871 Satoshi
+Ari Gold           16189 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After Transaction #5
+----------------------
+Vincent Chase      20000 Satoshi
+Eric Murphy           64 Satoshi
+Johnny Chase        1649 Satoshi
+Turtle               871 Satoshi
+Ari Gold           17416 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After Transaction #6
+----------------------
+Vincent Chase      20010 Satoshi
+Eric Murphy           54 Satoshi
+Johnny Chase        1649 Satoshi
+Turtle               871 Satoshi
+Ari Gold           17416 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After Transaction #7
+----------------------
+Vincent Chase      20010 Satoshi
+Eric Murphy         5263 Satoshi
+Johnny Chase        1649 Satoshi
+Turtle               871 Satoshi
+Ari Gold           12207 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After Transaction #8
+----------------------
+Vincent Chase      20010 Satoshi
+Eric Murphy          540 Satoshi
+Johnny Chase        1649 Satoshi
+Turtle              5594 Satoshi
+Ari Gold           12207 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After Transaction #9
+----------------------
+Vincent Chase      20010 Satoshi
+Eric Murphy          540 Satoshi
+Johnny Chase        1649 Satoshi
+Turtle              5449 Satoshi
+Ari Gold           12352 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After Transaction #10
+----------------------
+Vincent Chase      20010 Satoshi
+Eric Murphy          540 Satoshi
+Johnny Chase         411 Satoshi
+Turtle              6687 Satoshi
+Ari Gold           12352 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
+After All Transactions
+----------------------
+Vincent Chase      20010 Satoshi
+Eric Murphy          540 Satoshi
+Johnny Chase         411 Satoshi
+Turtle              6687 Satoshi
+Ari Gold           12352 Satoshi
+---------------------------------
+Total              40000 Satoshi
+#################################
