@@ -9,7 +9,7 @@ if sys.version_info < (3, 6):
 # initiate the accounts
 def initiate():
     accounts = []
-
+    # Account names are fictional characters based on a TV-serie.
     accounts.append({"name" : "Vincent Chase", "balance" : 20000})
     accounts.append({"name" : "Eric Murphy", "balance" : 3500})
     accounts.append({"name" : "Johnny Chase", "balance" : 1500})
@@ -24,24 +24,24 @@ def listAccounts(state, accounts, out):
         out.write("#################################\n")
 
     out.write(state)
-    out.write("\n----------------------\n")
+    out.write("\n----------------------------------------------------------------\n")
 
     total = 0
     for account in accounts:
         total += account["balance"]
         out.write(account["name"].ljust(16) + str(account["balance"]).rjust(8) + " Satoshi\n")
-    out.write("---------------------------------\n")
+    out.write("----------------------------------------------------------------\n")
     out.write("Total".ljust(16) + str(total).rjust(8) + " Satoshi\n")
     out.write("#################################\n")
 
 def main():
     seed("entourage")                                   # to obtain the same results
 
-    ab = open("AccountBalances.txt", "w")               # will contain the balances of the all the accounts after every transaction
-    lc = open("LongestChain.txt", "w")                  # will contain the bitcoin transactions as stated in the homework document
+    acc_bal = open("AccountBalances.txt", "w")               # will contain the balances of the all the accounts after every transaction
+    long_cha = open("LongestChain_linux.txt", "w")            # will contain the bitcoin transactions as stated in the homework document
 
     accounts = initiate()                               # initiate the accounts
-    listAccounts("Before Any Transaction", accounts, ab)  # list accounts before any transaction
+    listAccounts("Before Any Transaction", accounts, acc_bal)  # list accounts before any transaction
 
     prevHash = "First transaction"
 
@@ -49,7 +49,7 @@ def main():
     for i in range(10):
         s = "*** Bitcoin transaction ***\n"
 
-        # serial is a random 128-bit number
+        # serial is a random 128-bit integer
         serial = randint(0, 2**128 - 1)
         s+= "Serial number: " + str(serial) + "\n"
 
@@ -67,9 +67,9 @@ def main():
 
         s += "Previous hash in the chain: " + prevHash + "\n"
 
-        # find a nonce and compute pow
+        # find a suitable nonce and compute proof of work
         while True:
-            # nonce is obtained with a random 18-bit integer
+            # nonce is obtained with a random 128-bit integer
             nonce = "Nonce: " + str(randint(0, 2**128 - 1)) + "\n"
             possible = s + nonce
 
@@ -82,22 +82,22 @@ def main():
         s = possible
         s += "Proof of Work: " + hashed + "\n"
 
-        lc.write(s)
+        long_cha.write(s)
 
         # perform transaction
         accounts[payer_index]["balance"] -= amount
         accounts[payee_index]["balance"] += amount
 
         # list accounts after each transaction
-        listAccounts("After Transaction #" + str(i+1), accounts, ab)
+        listAccounts("After Transaction #" + str(i+1), accounts, acc_bal)
 
         prevHash = hashed
 
     # list accounts after all transactions
-    listAccounts("After All Transactions", accounts, ab)
+    listAccounts("After All Transactions", accounts, acc_bal)
 
-    ab.close()
-    lc.close()
+    acc_bal.close()
+    long_cha.close()
 
 if __name__ == "__main__":
     start_time = time.time()
