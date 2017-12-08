@@ -13,10 +13,10 @@ The program included in this homework has been written and executed in UNIX.
 
 Files and Explanations:
 
-  Phase1_UNIX.py:
+  Phase1_UNIX-Linux.py:
 
   This is the main program for Phase 1, written and executed in UNIX.
-  To run, execute the following command on the terminal: python2 Phase1_UNIX.py
+  To run, execute the following command on the terminal: python2 Phase1_UNIX-Linux.py
 
   In this program, 5 initial accounts has been generated.
   Then, 10 transactions have been performed between a random payer-payee pair, with a random amount.
@@ -25,7 +25,7 @@ Files and Explanations:
 
   Program also generates 2 files:
 
-    1- 	LongestChain_UNIX.txt:
+    1- 	LongestChain_UNIX-Linux.txt:
 
         This file is the requested output file in the homework document.
         It contains the bitcoin transactions with the following:
