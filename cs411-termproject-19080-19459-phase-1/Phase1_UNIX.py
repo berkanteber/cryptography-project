@@ -1,14 +1,16 @@
-####################################################################################################
-# Project Group:                                                                                  ##
-# 19080 - Berkan Teber                                                                            ##
-# 19459 - Arda Olmezsoy                                                                           ##
-####################################################################################################
-# Important Note:                                                                                 ##
-# This program has been written and executed in UNIX.                                             ##
-####################################################################################################
-# Program prints out the execution time, which is approximately 25 minutes, as standard output.   ##
-# Program also generates 2 files: LongestChain_UNIX.txt and AccountBalances.txt                   ##
-####################################################################################################
+############################################################################################################
+# Project Group:                                                                                          ##
+# 19080 - Berkan Teber                                                                                    ##
+# 19459 - Arda Olmezsoy                                                                                   ##
+############################################################################################################
+# Important Note:                                                                                         ##
+# This program has been written and executed in UNIX.                                                     ##
+############################################################################################################
+# Program prints out the execution time, which is approximately 25 minutes, as standard output.           ##
+# Program also generates 2 files:                                                                         ##
+#                   1- LongestChain_UNIX.txt, which is the requested files.                               ##
+#                   2- AccountBalances.txt, which includes the balances of the accounts after each step.  ##
+############################################################################################################
 
 import sys
 import time
@@ -51,7 +53,7 @@ def main():
     seed("entourage")                                   # to obtain the same results
 
     balances = open("AccountBalances.txt", "w")               # will contain the balances of the all the accounts after every transaction
-    chain = open("LongestChain_UNIX.txt", "w")            # will contain the bitcoin transactions as stated in the homework document
+    chain = open("LongestChain_UNIX-Linux.txt", "w")            # will contain the bitcoin transactions as stated in the homework document
 
     accounts = initiate()                               # initiate the accounts
     listAccounts("Before Any Transaction", accounts, balances)  # list accounts before any transaction
@@ -76,7 +78,7 @@ def main():
         s+= "Payer: " + str(payer) + "\n"
         s+= "Payee: " + str(payee) + "\n"
 
-        s+= "Amount: " + str(amount) + "\n"
+        s+= "Amount: " + str(amount) + " Satoshi" + "\n"
 
         s += "Previous hash in the chain: " + prevHash + "\n"
 

@@ -37,7 +37,7 @@ print "Chain Validation:"
 # Chain File
 PoWLen = 6
 TxLen = 8
-retVal = ValidateChain("LongestChain_UNIX.txt", PoWLen, TxLen)
+retVal = ValidateChain("LongestChain_UNIX-Linux.txt", PoWLen, TxLen)
 if retVal == 1:
     print "\n\nHash chain validated:):)"
 elif retVal == -1:
