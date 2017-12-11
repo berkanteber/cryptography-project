@@ -7,9 +7,7 @@
 # This program has been written and executed in UNIX.                                                     ##
 ############################################################################################################
 # Program prints out the execution time, which is approximately 25 minutes, as standard output.           ##
-# Program also generates 2 files:                                                                         ##
-#                   1- LongestChain_UNIX.txt, which is the requested files.                               ##
-#                   2- AccountBalances.txt, which includes the balances of the accounts after each step.  ##
+# Program also generates the file SignatureTransaction.txt, which is the requested file.                  ##
 ############################################################################################################
 
 import sys
