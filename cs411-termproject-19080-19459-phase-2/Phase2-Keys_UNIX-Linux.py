@@ -18,14 +18,13 @@ from random import seed, randint
 def main():
     seed("19080-19459") # to obtain the same results
 
-    params = open("DSA_params.txt")
 
     # get previously computed parameters
+    params = open("DSA_params.txt")
     qpg = []
     for line in params:
         qpg.append(int(line))
     q, p, g = qpg
-
     params.close()
 
     # compute alpha and beta
