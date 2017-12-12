@@ -10,7 +10,7 @@
 # Program also generates the file SignatureTransaction.txt, which is the requested file.                  ##
 ############################################################################################################
 
-def GenSingleTx:
+def GenSingleTx(p, q, g, alpha, beta):
     string = "*** Bitcoin transaction ***\n"
 
     serial = randint(0, 2**128 - 1)
