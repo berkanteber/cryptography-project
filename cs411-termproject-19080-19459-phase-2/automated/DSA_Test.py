@@ -38,12 +38,12 @@ def checkDSAparams(p, q, g):
     return 0
 
 # random.seed(3) # uncommment if you want it to generate the same random number in every run
-ParamGenOn = 1   # set to 1 if you want to generate the DSA parameters
-ParamTestOn = 1  # set to 1 if you want to validate the DSA parameters
-KeyGenOn = 1     # set to 1 if your want to generate secret/public key pair for a user
-KeyTestOn = 1    # set to 1 if you want to validate the DSA keys
-SignTestOn = 1   # set to 1 if you want to test your signature generation and verification
-TxGenOn = 1      # set to 1 if you want to generate a signed bitcoin transaction
+ParamGenOn = 0   # set to 1 if you want to generate the DSA parameters
+ParamTestOn = 0  # set to 1 if you want to validate the DSA parameters
+KeyGenOn = 0     # set to 1 if your want to generate secret/public key pair for a user
+KeyTestOn = 0    # set to 1 if you want to validate the DSA keys
+SignTestOn = 0   # set to 1 if you want to test your signature generation and verification
+TxGenOn = 0      # set to 1 if you want to generate a signed bitcoin transaction
 
 # DSA parameter generation
 if ParamGenOn:
