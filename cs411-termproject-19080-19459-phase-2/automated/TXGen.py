@@ -10,19 +10,22 @@
 # Program also generates the file SignatureTransaction.txt, which is the requested file.                  ##
 ############################################################################################################
 
+import random
+import hashlib
+
 def GenSingleTx(p, q, g, alpha, beta):
     string = "*** Bitcoin transaction ***\n"
 
-    serial = randint(0, 2**128 - 1)
+    serial = random.randint(0, 2**128 - 1)
     string += "Serial number: " + str(serial) + "\n"
 
-    payer = hex(randint(0, 2**40 - 1))[2:].upper()
+    payer = hex(random.randint(0, 2**40 - 1))[2:].upper()
     string += "Payer: " + payer + "\n"
 
-    payee = hex(randint(0, 2**40 - 1))[2:].upper()
+    payee = hex(random.randint(0, 2**40 - 1))[2:].upper()
     string += "Payee: " + payee + "\n"
 
-    amount = randint(1, 1000)
+    amount = random.randint(1, 1000)
     string += "Amount: " + str(amount) + " Satoshi" + "\n"
 
     string += "p: " + str(p) + "\n"
@@ -36,7 +39,7 @@ def GenSingleTx(p, q, g, alpha, beta):
     h = int(hashlib.sha3_256(string).hexdigest(), 16)
     h = h % q
 
-    k = randint(1, q - 1)
+    k = random.randint(1, q - 1)
     r = pow(g, k, p)
 
     s = (alpha * r + k * h) % q

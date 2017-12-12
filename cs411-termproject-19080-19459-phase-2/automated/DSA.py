@@ -10,6 +10,13 @@
 # Program also generates the file DSA_params.txt which is the requested file                              ##
 ############################################################################################################
 
+import sys
+import random
+import hashlib
+
+if sys.version_info < (3, 6):
+    import sha3
+
 # obtained from the resources
 def BasicTest(n, q, k):
     a = random.randint(2, n-1)
@@ -50,17 +57,17 @@ def PrimalityTest(n,t):
 
 def DL_Param_Generator(small_bound, large_bound):
     while True:
-        q = randint(2**(smallbit-1), 2**smallbit - 1)
-        if MillerRabinTestByErkaySavas.PrimalityTest(q, 10) == 1:
+        q = random.randint(0, small_bound - 1)
+        if PrimalityTest(q, 10) == 1:
             break
 
     while True:
-        p = q * randint(2**(largebit-smallbit-1), 2**(largebit-smallbit)) + 1
-        if MillerRabinTestByErkaySavas.PrimalityTest(p, 10) == 1:
+        p = q * random.randint(0, int(large_bound / small_bound)) + 1
+        if PrimalityTest(p, 10) == 1:
             break
 
     while True:
-        alpha = randint(0, p - 1)
+        alpha = random.randint(0, p - 1)
         g = pow(alpha, (p-1) / q, p)
         if g != 1:
             break
@@ -68,40 +75,52 @@ def DL_Param_Generator(small_bound, large_bound):
     return q, p, g
 
 def KeyGen(p, q, g):
-    alpha = randint(1, q - 1)
+    alpha = random.randint(1, q - 1)
     beta = pow(g, alpha, p)
 
     return (alpha, beta)
 
-def SignGen(p, q, g, alpha, beta):
-    string = "*** Bitcoin transaction ***\n"
-
-    serial = randint(0, 2**128 - 1)
-    string += "Serial number: " + str(serial) + "\n"
-
-    payer = hex(randint(0, 2**40 - 1))[2:].upper()
-    string += "Payer: " + payer + "\n"
-
-    payee = hex(randint(0, 2**40 - 1))[2:].upper()
-    string += "Payee: " + payee + "\n"
-
-    amount = randint(1, 1000)
-    string += "Amount: " + str(amount) + " Satoshi" + "\n"
-
-    string += "p: " + str(p) + "\n"
-    string += "q: " + str(q) + "\n"
-    string += "g: " + str(g) + "\n"
-
-    string += "Public Key (beta): " + str(beta) + "\n"
-
-    # compute signature
-
-    h = int(hashlib.sha3_256(string).hexdigest(), 16)
+def SignGen(m, p, q, g, alpha, beta):
+    h = int(hashlib.sha3_256(m).hexdigest(), 16)
     h = h % q
 
-    k = randint(1, q - 1)
+    k = random.randint(1, q - 1)
     r = pow(g, k, p)
 
     s = (alpha * r + k * h) % q
 
     return (r, s)
+
+# taken from the homework 4
+def egcd(a, b):
+    x,y, u,v = 0,1, 1,0
+    while a != 0:
+        q, r = b//a, b%a
+        m, n = x-u*q, y-v*q
+        b,a, x,y, u,v = a,r, u,v, m,n
+    gcd = b
+    return gcd, x, y
+
+# taken from the homework 4
+def modinv(a, m):
+    gcd, x, y = egcd(a, m)
+    if gcd != 1:
+        return None  # modular inverse does not exist
+    else:
+        return x % m
+
+def SignVer(m, r, s, p, q, g, beta):
+    h = int(hashlib.sha3_256(m).hexdigest(), 16)
+    h = h % q
+
+    v = modinv(h, q)
+
+    z1 = (s * v) % q
+    z2 = ((q - r) * v) % q
+
+    u = (pow(g, z1, p) * pow(beta, z2, p)) % p
+
+    if (r % q) == (u % q):
+        return 1
+    else:
+        return -1

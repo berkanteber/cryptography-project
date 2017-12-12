@@ -11,13 +11,13 @@ def random_string(size=6, chars=string.ascii_uppercase + string.digits):
 
 def checkDSAparams(p, q, g):
     warnings.simplefilter('ignore')
-    check = pyprimes.is_prime(q)
+    check = pyprimes.isprime(q)
     warnings.simplefilter('default')
     if check == False:
         return -1
 
     warnings.simplefilter('ignore')
-    check = pyprimes.is_prime(p)
+    check = pyprimes.isprime(p)
     warnings.simplefilter('default')
     if check == False:
         return -2
@@ -37,18 +37,18 @@ def checkDSAparams(p, q, g):
 
     return 0
 
-# random.seed(3) # uncommment if you want it to generate the same random number in every run 
-ParamGenOn = 0   # set to 1 if you want to generate the DSA parameters
-ParamTestOn = 0  # set to 1 if you want to validate the DSA parameters 
-KeyGenOn = 0     # set to 1 if your want to generate secret/public key pair for a user 
-KeyTestOn = 0    # set to 1 if you want to validate the DSA keys
-SignTestOn = 0   # set to 1 if you want to test your signature generation and verification 
-TxGenOn = 0      # set to 1 if you want to generate a signed bitcoin transaction
+# random.seed(3) # uncommment if you want it to generate the same random number in every run
+ParamGenOn = 1   # set to 1 if you want to generate the DSA parameters
+ParamTestOn = 1  # set to 1 if you want to validate the DSA parameters
+KeyGenOn = 1     # set to 1 if your want to generate secret/public key pair for a user
+KeyTestOn = 1    # set to 1 if you want to validate the DSA keys
+SignTestOn = 1   # set to 1 if you want to test your signature generation and verification
+TxGenOn = 1      # set to 1 if you want to generate a signed bitcoin transaction
 
 # DSA parameter generation
 if ParamGenOn:
     print "DSA Parameter Generation: "
-    small_bound = 1 << 256 
+    small_bound = 1 << 256
     large_bound = 1 << 2048
 
     q, p, g = DSA.DL_Param_Generator(small_bound, large_bound)
@@ -75,7 +75,7 @@ if ParamTestOn:
         else:
             print 'DSA_params.txt does not exist'
             sys.exit()
-  
+
     res = checkDSAparams(p, q, g)
     if res ==0:
         print "\nDSA parameters are OK:))"
@@ -108,7 +108,7 @@ if KeyGenOn:
         else:
             print 'DSA_params.txt does not exist'
             sys.exit()
-            
+
     (alpha, beta) = DSA.KeyGen(p, q, g)
     outf = open('DSA_skey.txt', 'w')
     outf.write(str(q)+"\n")
@@ -116,7 +116,7 @@ if KeyGenOn:
     outf.write(str(g)+"\n")
     outf.write(str(alpha)+"\n")
     outf.close()
-    print "Public key written into file DSA_skey.txt" 
+    print "Public key written into file DSA_skey.txt"
 
     outf = open('DSA_pkey.txt', 'w')
     outf.write(str(q)+"\n")
@@ -143,7 +143,7 @@ if KeyTestOn:
             beta = int(lines[3])
             pkeyFile.close()
             print "Public key is read from DSA_pkey.txt"
-            
+
         else:
             print 'DSA_skey.txt or DSA_pkey.txt does not exist'
             sys.exit()
@@ -154,7 +154,7 @@ if KeyTestOn:
         print "Public and secret keys are NOT good:(("
         sys.exit()
 
-# Validate the signature generation and verification functions for randomly generated message m    
+# Validate the signature generation and verification functions for randomly generated message m
 if SignTestOn:
     if KeyGenOn == 0:
         if os.path.exists('DSA_pkey.txt') == True and os.path.exists('DSA_skey.txt') == True:
@@ -171,7 +171,7 @@ if SignTestOn:
             beta = int(lines[3])
             pkeyFile.close()
             print "Public key is read from DSA_pkey.txt"
-            
+
         else:
             print 'DSA_skey.txt or DSA_pkey.txt does not exist'
             sys.exit()
@@ -207,12 +207,12 @@ if TxGenOn:
             beta = int(lines[3])
             pkeyFile.close()
             print "Public key is read from DSA_pkey.txt"
-            
+
         else:
             print 'DSA_skey.txt or DSA_pkey.txt does not exist'
             sys.exit()
 
-    
+
     transaction=TxGen.GenSingleTx(p, q, g, alpha, beta)
     TxFile = open("SingleTransaction.txt", "w")
     TxFile.write(transaction)
