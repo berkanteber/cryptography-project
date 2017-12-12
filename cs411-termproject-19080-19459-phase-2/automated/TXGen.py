@@ -6,13 +6,11 @@
 # Important Note:                                                                                         ##
 # This program has been written and executed in UNIX.                                                     ##
 ############################################################################################################
-# Program prints out the execution time, which is approximately 25 minutes, as standard output.           ##
-# Program also generates the file SignatureTransaction.txt, which is the requested file.                  ##
-############################################################################################################
 
 import random
 import hashlib
 
+# generates a single transaction as defined in the homework document
 def GenSingleTx(p, q, g, alpha, beta):
     string = "*** Bitcoin transaction ***\n"
 

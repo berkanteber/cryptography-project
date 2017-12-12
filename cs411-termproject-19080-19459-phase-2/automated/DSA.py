@@ -6,9 +6,6 @@
 # Important Note:                                                                                         ##
 # This program has been written and executed in UNIX.                                                     ##
 ############################################################################################################
-# Program prints out the execution time, which is approximately 30 seconds, as standard output.           ##
-# Program also generates the file DSA_params.txt which is the requested file                              ##
-############################################################################################################
 
 import sys
 import random
@@ -55,6 +52,7 @@ def PrimalityTest(n,t):
             return -1
     return MRTest(n, t)
 
+# generates q, p and alpha as defined in the lecture slides
 def DL_Param_Generator(small_bound, large_bound):
     while True:
         q = random.randint(0, small_bound - 1)
@@ -74,12 +72,14 @@ def DL_Param_Generator(small_bound, large_bound):
 
     return q, p, g
 
+# generates alpha and beta as defined in the homework document
 def KeyGen(p, q, g):
     alpha = random.randint(1, q - 1)
     beta = pow(g, alpha, p)
 
     return (alpha, beta)
 
+# generates signatures r and s as defined in the homework document
 def SignGen(m, p, q, g, alpha, beta):
     h = int(hashlib.sha3_256(m).hexdigest(), 16)
     h = h % q
@@ -91,7 +91,7 @@ def SignGen(m, p, q, g, alpha, beta):
 
     return (r, s)
 
-# taken from the homework 4
+# taken from the homework 4 document
 def egcd(a, b):
     x,y, u,v = 0,1, 1,0
     while a != 0:
@@ -101,7 +101,7 @@ def egcd(a, b):
     gcd = b
     return gcd, x, y
 
-# taken from the homework 4
+# taken from the homework 4 document
 def modinv(a, m):
     gcd, x, y = egcd(a, m)
     if gcd != 1:
@@ -109,6 +109,7 @@ def modinv(a, m):
     else:
         return x % m
 
+# verifies the signature as defined in the homework document
 def SignVer(m, r, s, p, q, g, beta):
     h = int(hashlib.sha3_256(m).hexdigest(), 16)
     h = h % q
@@ -122,5 +123,4 @@ def SignVer(m, r, s, p, q, g, beta):
 
     if (r % q) == (u % q):
         return 1
-    else:
-        return -1
+    return -1
