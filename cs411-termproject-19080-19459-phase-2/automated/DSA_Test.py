@@ -37,7 +37,7 @@ def checkDSAparams(p, q, g):
 
     return 0
 
-# random.seed(3) # uncommment if you want it to generate the same random number in every run
+random.seed(3) # uncommment if you want it to generate the same random number in every run
 ParamGenOn = 0   # set to 1 if you want to generate the DSA parameters
 ParamTestOn = 0  # set to 1 if you want to validate the DSA parameters
 KeyGenOn = 0     # set to 1 if your want to generate secret/public key pair for a user
