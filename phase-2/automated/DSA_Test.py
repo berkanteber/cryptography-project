@@ -44,6 +44,7 @@ KeyGenOn = 0     # set to 1 if your want to generate secret/public key pair for 
 KeyTestOn = 0    # set to 1 if you want to validate the DSA keys
 SignTestOn = 0   # set to 1 if you want to test your signature generation and verification
 TxGenOn = 0      # set to 1 if you want to generate a signed bitcoin transaction
+TxTestOn = 0     # set to 1 if you want to validate your transaction
 
 # DSA parameter generation
 if ParamGenOn:
@@ -212,9 +213,35 @@ if TxGenOn:
             print 'DSA_skey.txt or DSA_pkey.txt does not exist'
             sys.exit()
 
-
     transaction=TxGen.GenSingleTx(p, q, g, alpha, beta)
     TxFile = open("SingleTransaction.txt", "w")
     TxFile.write(transaction)
     TxFile.close()
     print "Transaction is written into SingleTransaction.txt"
+
+# Read a transaction from a file and validate it
+if TxTestOn:
+    if os.path.exists("SingleTransaction.txt") == True:
+        txFile = open('SingleTransaction.txt', 'r')
+        lines = txFile.readlines()
+        SignedPart = "".join(lines[0:len(lines)-2])
+        tmp = lines[5]
+        p = int(tmp[3:])
+        tmp = lines[6]
+        q = int(tmp[3:])
+        tmp = lines[7]
+        g = int(tmp[3:])
+        tmp = lines[8]
+        beta = int(tmp[19:])
+        tmp = lines[9]
+        r = int(tmp[15:])
+        tmp = lines[10]
+        s = int(tmp[15:])
+        if DSA.SignVer(SignedPart, r, s, p, q, g, beta)==1:
+            print "Signature verifies:))"
+        else:
+            print "Signature does not verify:(("
+            sys.exit()
+    else:
+        print 'SingleTransaction.txt does not exist'
+        sys.exit()
