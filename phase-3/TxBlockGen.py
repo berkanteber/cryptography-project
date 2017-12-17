@@ -7,8 +7,12 @@
 # This program has been written and executed in UNIX.                                                     ##
 ############################################################################################################
 
+import sys
 import random
 import hashlib
+
+if sys.version_info < (3, 6):
+    import sha3
 
 def GenTxBlock(p, q, g, TxCount):
     bigstring = ""

@@ -10,6 +10,9 @@
 import random
 import hashlib
 
+if sys.version_info < (3, 6):
+    import sha3
+
 # generates a single transaction as defined in the homework document
 def GenSingleTx(p, q, g, alpha, beta):
     string = "*** Bitcoin transaction ***\n"

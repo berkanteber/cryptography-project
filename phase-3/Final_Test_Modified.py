@@ -6,12 +6,12 @@ import pyprimes
 import hashlib
 import DSA, TxBlockGen, PoW
 
-TxBlocksGenOn = 0    # set to 1 if you want to generate a block of bitcoin transaction
-PoWGenOn = 0         # set to 1 if you want to provide PoW for given transaction blocks
-BlockChainTestOn = 1 # set ot 1 if you want to validate the block chain
-ValidateTxOn = 1     # set to 1 if you want to validate a transaction
+TxBlocksGenOn = 1    # set to 1 if you want to generate a block of bitcoin transaction
+PoWGenOn = 1         # set to 1 if you want to provide PoW for given transaction blocks
+BlockChainTestOn = 0 # set ot 1 if you want to validate the block chain
+ValidateTxOn = 0     # set to 1 if you want to validate a transaction
 
-blockCount = 24 # number of link in the block chain (you can change)
+blockCount = 8 # number of link in the block chain (you can change)
 TxCount = 8    # number of transactions in a block (you can change, but set it to a power of two)
 PoWLen = 4     # the number of 0s in PoW (you can change)
 TxLen = 10     # no of lines in a transaction (do not change)
@@ -31,7 +31,7 @@ if TxBlocksGenOn:
         sys.exit()
 
     FileName = "TransactionBlock"
-    for i in range(0,blockCount):
+    for i in range(int(sys.argv[1]),int(sys.argv[1])+blockCount):
         transaction=TxBlockGen.GenTxBlock(p, q, g, TxCount)
         TxBlockFileName = FileName+str(i)+".txt"
         TxBlockFile = open(TxBlockFileName, "w")
@@ -43,7 +43,7 @@ if TxBlocksGenOn:
 if PoWGenOn:
     FileName = "TransactionBlock"
     ChainFileName = "LongestChain.txt"
-    for i in range(0,blockCount):
+    for i in range(int(sys.argv[1]),int(sys.argv[1])+blockCount):
         TxBlockFileName = FileName+str(i)+".txt"
         if os.path.exists(TxBlockFileName) == True:
             PoW.PoW(TxBlockFileName, ChainFileName, PoWLen, TxLen)
