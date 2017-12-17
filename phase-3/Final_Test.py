@@ -6,10 +6,10 @@ import pyprimes
 import hashlib
 import DSA, TxBlockGen, PoW
 
-TxBlocksGenOn = 0    # set to 1 if you want to generate a block of bitcoin transaction
+TxBlocksGenOn = 1    # set to 1 if you want to generate a block of bitcoin transaction
 PoWGenOn = 0         # set to 1 if you want to provide PoW for given transaction blocks
 BlockChainTestOn = 0 # set ot 1 if you want to validate the block chain
-ValidateTxOn = 1     # set to 1 if you want to validate a transaction 
+ValidateTxOn = 0     # set to 1 if you want to validate a transaction
 
 blockCount = 3 # number of link in the block chain (you can change)
 TxCount = 8    # number of transactions in a block (you can change, but set it to a power of two)
@@ -29,7 +29,7 @@ if TxBlocksGenOn:
     else:
         print 'DSA_params.txt does not exist'
         sys.exit()
-    
+
     FileName = "TransactionBlock"
     for i in range(0,blockCount):
         transaction=TxBlockGen.GenTxBlock(p, q, g, TxCount)
@@ -47,11 +47,11 @@ if PoWGenOn:
         TxBlockFileName = FileName+str(i)+".txt"
         if os.path.exists(TxBlockFileName) == True:
             PoW.PoW(TxBlockFileName, ChainFileName, PoWLen, TxLen)
-            print "Proof of work is written/appended to "+ ChainFileName 
+            print "Proof of work is written/appended to "+ ChainFileName
         else:
             print "Error: ", TxBlockFileName, "does not exist"
             sys.exit()
-            
+
 
 # Validate the block chain
 if BlockChainTestOn:
@@ -61,7 +61,7 @@ if BlockChainTestOn:
         blocks = BlockChainFile.readlines()
         blockCnt = len(blocks)/LinkLen
         PoW = blocks[LinkLen-1][:-1]
-        
+
         if PoW != hashlib.sha3_256("".join(blocks[0:LinkLen-1])).hexdigest():
             print "Block chain does not validate:(("
             sys.exit()
@@ -81,8 +81,8 @@ if BlockChainTestOn:
                  sys.exit()
             if PoW[0:PoWLen] != "0"*PoWLen:
                 print "Invalid proof of work:(("
-                sys.exit()     
-                
+                sys.exit()
+
         print "Block chain validates:))"
         BlockChainFile.close()
     else:
@@ -103,7 +103,7 @@ if ValidateTxOn:
     if os.path.exists(TxBlockFileName) == False:
         print "Error: ", TxBlockFileName, "does not exist"
         sys.exit()
-    
+
     TxBlockFile = open(TxBlockFileName, "r")
     lines = TxBlockFile.readlines()
     TxBlockFile.close()
@@ -134,7 +134,7 @@ if ValidateTxOn:
 
     # read the root hash from the BlockChainFileName file
     rootHash = blocks[LinkLen*blockNo+1]
-    
+
     # compute the hash tree from the transaction
     # Construct the hash tree
     hashTree = []
@@ -155,5 +155,5 @@ if ValidateTxOn:
         print "Transaction does not belong to block number ", blockNo, ":(("
     else:
         print "Transaction belongs to block number ", blockNo, ":))"
-    
+
     BlockChainFile.close()
