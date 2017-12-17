@@ -14,6 +14,7 @@ import hashlib
 if sys.version_info < (3, 6):
     import sha3
 
+# generates a block of transaction with given number of numbers
 def GenTxBlock(p, q, g, TxCount):
     bigstring = ""
 
@@ -26,6 +27,8 @@ def GenTxBlock(p, q, g, TxCount):
         string += "p: " + str(p) + "\n"
         string += "q: " + str(q) + "\n"
         string += "g: " + str(g) + "\n"
+
+        # we assume payer and payee never repeats
 
         payer_alpha = random.randint(1, q - 1)
         payer_beta = pow(g, payer_alpha, p)

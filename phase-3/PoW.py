@@ -14,9 +14,12 @@ import hashlib
 if sys.version_info < (3, 6):
     import sha3
 
+# appends pow and other related data to the chain for a given transaction
 def PoW(TxBlockFileName, ChainFileName, PoWLen, TxLen):
     chain = open(ChainFileName, "a+")
     chainstring = ""
+
+    # find and append the previous hash value
 
     chain.seek(0)
     lasthash = "Day Zero Link in the Chain"
@@ -25,6 +28,8 @@ def PoW(TxBlockFileName, ChainFileName, PoWLen, TxLen):
     chainstring += lasthash + "\n"
 
     block = open(TxBlockFileName, "r")
+
+    # compute and append the root hash value of the merkle tree
 
     lines = []
     for line in block:
@@ -48,6 +53,8 @@ def PoW(TxBlockFileName, ChainFileName, PoWLen, TxLen):
 
     roothash = hashes[0]
     chainstring += roothash + "\n"
+
+    # compute and append nonce and pow
 
     while True:
         nonce = str(random.randint(0, 2**128 - 1)) + "\n"
