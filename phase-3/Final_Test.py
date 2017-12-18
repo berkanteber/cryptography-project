@@ -11,7 +11,7 @@ PoWGenOn = 0         # set to 1 if you want to provide PoW for given transaction
 BlockChainTestOn = 1 # set ot 1 if you want to validate the block chain
 ValidateTxOn = 1     # set to 1 if you want to validate a transaction
 
-blockCount = 130 # number of link in the block chain (you can change)
+blockCount = 140 # number of link in the block chain (you can change)
 TxCount = 8    # number of transactions in a block (you can change, but set it to a power of two)
 PoWLen = 6     # the number of 0s in PoW (you can change)
 TxLen = 10     # no of lines in a transaction (do not change)
