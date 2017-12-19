@@ -121,4 +121,4 @@ if ValidateTxOn:
         BlockChainFile.close()
 
     print ""
-    print "All %d transactions validates:))" % int(sys.argv[2])
+    print "All %d transactions validate:))" % int(sys.argv[2])
