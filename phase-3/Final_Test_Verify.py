@@ -117,5 +117,5 @@ if ValidateTxOn:
             print "Transaction does not belong to block number ", blockNo, ":(( (", str(cntr), ")"
             sys.exit()
 
-        BlockChainFile.close()
         print "OK"
+        BlockChainFile.close()
