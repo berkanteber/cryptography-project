@@ -64,7 +64,7 @@ if ValidateTxOn:
         # open the transaction block file blockNo and read all transactions in it
         TxBlockFileName = "TransactionBlock"+str(blockNo)+".txt"
         if os.path.exists(TxBlockFileName) == False:
-            print "Error: ", TxBlockFileName, "does not exist (", str(cntr), ")"
+            print "Error"
             sys.exit()
 
         TxBlockFile = open(TxBlockFileName, "r")
@@ -81,7 +81,7 @@ if ValidateTxOn:
         r = int(transaction[8][15:])
         s = int(transaction[9][15:])
         if DSA.SignVer(SignedPart, r, s, p, q, g, beta)!=1:
-            print "The signature of the transaction does not verify:(( (", str(cntr), ")"
+            print "Error"
             sys.exit()
 
         # Check if the transaction really belongs to that block
@@ -89,7 +89,7 @@ if ValidateTxOn:
         # The method is hash tree
         BlockChainFileName = "LongestChain.txt"
         if os.path.exists(BlockChainFileName) == False:
-            print "Error: ", BlockChainFileName, "does not exist"
+            print "Error"
             sys.exit()
         BlockChainFile = open(BlockChainFileName, "r")
         blocks = BlockChainFile.readlines()
@@ -114,7 +114,7 @@ if ValidateTxOn:
         h = hashTree[2*TxCount-2]
 
         if h != rootHash[:-1]:
-            print "Transaction does not belong to block number ", blockNo, ":(( (", str(cntr), ")"
+            print "Error"
             sys.exit()
 
         print "OK"
