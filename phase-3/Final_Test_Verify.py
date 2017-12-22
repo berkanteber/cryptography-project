@@ -57,9 +57,9 @@ if ValidateTxOn:
         blockNo = random.randint(0,blockCount-1)
         txNo = random.randint(0,TxCount-1)
 
-        print "Trial no:", cntr, "\t",
-        print "Block no: ", blockNo, "\t",
-        print "Transaction no: ", txNo, "\t",
+        print "Trial:", cntr, "\t",
+        print "Block: ", blockNo, "\t",
+        print "Transaction: ", txNo, "\t",
 
         # open the transaction block file blockNo and read all transactions in it
         TxBlockFileName = "TransactionBlock"+str(blockNo)+".txt"
