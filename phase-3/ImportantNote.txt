@@ -1,0 +1,3 @@
+Running Final_Test.py with PoWGenOn = 1 will result in appending the relevant PoW's to a the LongestChain.txt.
+Therefore, existence of a nonempty current LongestChain.txt file will result a problem.
+To avoid this problem, delete LongestChain.txt before generating transactions and pow's.
